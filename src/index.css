@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .card-btn {
+        @apply w-full bg-[#FF6347] hover:bg-[#FF4500] py-3 rounded-md text-white font-semibold
+    }
+
+    .card-btn-visited {
+        @apply w-full bg-[#abdbe3] py-3 rounded-md text-white font-semibold cursor-not-allowed
+    }
+
+    .card-container {
+        @apply max-w-[1320px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 px-5 lg:px-10 2xl:px-0
+    }
+
+    .body-bg {
+        @apply absolute inset-0 -z-10 h-full w-full bg-slate-200 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]
+    }
+
+    .modal-bg {
+        @apply fixed inset-0 bg-gray-800 bg-opacity-80 min-h-screen z-50 flex items-center justify-center px-3
+    }
+
+    .modal-body {
+        @apply rounded-2xl max-w-[700px] h-auto bg-white relative 
+    }
+
+    .modal-header {
+        @apply bg-[#0594BC] w-full py-8 min-h-24 rounded-t-2xl px-10 flex items-center justify-between text-white
+    }
+
+    .sort-btn-container {
+        @apply mt-[30vh] md:mt-[11vh] lg:mt-[16vh] 2xl:mt-[14vh] max-w-[1320px] mx-auto px-5 lg:px-10 2xl:px-0 mb-5
+    }
+
+    .sort-btn {
+        @apply border-[2px] border-[#154C79]/75 rounded-full px-6 py-2 text-[14px] font-medium text-[#154C79] hover:bg-[#0594BC] hover:text-white hover:border-[#0594BC] transition-all duration-300
+    }
+}
