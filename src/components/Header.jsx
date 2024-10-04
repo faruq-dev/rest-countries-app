@@ -6,11 +6,10 @@ const Header = ({searchQuery, handleSearch}) => {
 
         <div className="relative w-full md:w-auto">
           <input
-            type="search"
+            type="text"
             value={searchQuery}
-            placeholder="Search country ..."
-            name="search"
             onChange={handleSearch}
+            placeholder="Search country ..."
             className="bg-white px-4 py-3 rounded-lg w-full md:w-80 outline-none"
           />
           <div className="w-[25px] absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-85">
