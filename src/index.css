@@ -12,7 +12,7 @@
     }
 
     .card-container {
-        @apply max-w-[1320px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 px-5 lg:px-10 2xl:px-0
+        @apply max-w-[1320px] mx-auto mb-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 px-5 lg:px-10 2xl:px-0
     }
 
     .body-bg {
@@ -32,7 +32,7 @@
     }
 
     .sort-btn-container {
-        @apply mt-[30vh] md:mt-[11vh] lg:mt-[16vh] 2xl:mt-[14vh] max-w-[1320px] mx-auto px-5 lg:px-10 2xl:px-0 mb-5
+        @apply mt-[31vh] md:mt-[13vh] lg:mt-[19vh] 2xl:mt-[15vh] max-w-[1320px] mx-auto px-5 lg:px-10 2xl:px-0 mb-5
     }
 
     .sort-btn {
