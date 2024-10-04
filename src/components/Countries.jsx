@@ -32,6 +32,26 @@ const Countries = () => {
     fetchFunc();
   }, []);
 
+
+  //Debounce
+  useEffect(()=>{
+    //Debounce করা হলো এখানেঃ 
+    const timerID = setTimeout(()=>{
+      if(searchQuery){
+        const filtered = countries.filter((country) => {
+          return country.name.common.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+        setFilteredCountries(filtered);
+        console.log('log');
+      } else {
+        setFilteredCountries(countries);
+      }
+    }, 200);
+
+    return ()=>clearTimeout(timerID);
+    
+  }, [searchQuery, countries])
+
   //Sorting Function
   const sortPopulation = () => {
     if (sortOrder === "Low to High") {
@@ -61,11 +81,7 @@ const Countries = () => {
     const value = e.target.value;
     setSearchQuery(e.target.value);
 
-    const filtered = countries.filter((country) => {
-      return country.name.common.toLowerCase().includes(value.toLowerCase());
-    });
-
-    setFilteredCountries(filtered);
+    
   };
 
   return (
