@@ -1,11 +1,22 @@
 import { useState } from "react";
 
 const CountryCard = ({ country, click }) => {
-  let [btnStatus, setBtnStatus] = useState("View Details");
+  
+  let [btnStatus, setBtnStatus] = useState(country.visited);
 
   const handleClick = () => {
-    setBtnStatus("Visited");
-    click();
+    const localStorageData = JSON.parse(localStorage.getItem("countrylist"));
+    const findIndex = localStorageData.findIndex((countryData)=>{
+      return countryData.cca3 === country.cca3
+    })
+
+    if(findIndex > -1){
+      const updatedCountry = [...localStorageData];
+      updatedCountry[findIndex].visited = true; 
+      localStorage.setItem("countrylist", JSON.stringify(updatedCountry));
+    }
+    setBtnStatus(true);
+    click(country);
   };
   
 
@@ -44,13 +55,13 @@ const CountryCard = ({ country, click }) => {
       <div className="mt-auto">
         <button
           className={`${
-            btnStatus === "Visited" ? "card-btn-visited" : "card-btn"
+            btnStatus ? "card-btn-visited" : "card-btn"
           } `}
           onClick={handleClick}
-          disabled={btnStatus === "Visited"}
+          disabled={btnStatus === true}
         >
           {" "}
-          {btnStatus === "Visited" ? "Visited" : "View Details"}{" "}
+          {btnStatus ? "Visited" : "View Details"}{" "}
         </button>
       </div>
     </div>

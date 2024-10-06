@@ -14,22 +14,39 @@ const Countries = () => {
   //  ****************************************************************
 
   useEffect(() => {
-    const fetchFunc = async function () {
-      const fetchData = await fetch("https://restcountries.com/v3.1/all");
-      const data = await fetchData.json();
-      const filteredData = data.filter((country) => {
-        return (
-          country.name.common !== "India" &&
-          country.region !== "Europe" &&
-          country.subregion !== "North America" &&
-          country.name.common !== "Israel"
-        );
-      });
-      // console.log(filteredData);
-      setCountry(filteredData);
-      setFilteredCountries(filteredData);
-    };
-    fetchFunc();
+    const storedCountries = localStorage.getItem("countrylist");
+
+    if (storedCountries){
+      // console.log(JSON.parse(storedCountries));
+      const parsedCountries = JSON.parse(storedCountries);
+      setCountry(parsedCountries);
+      setFilteredCountries(parsedCountries);
+    } else {
+      const fetchFunc = async function () {
+        const fetchData = await fetch("https://restcountries.com/v3.1/all");
+        const data = await fetchData.json();
+        const filteredData = data.filter((country) => {
+          return (
+            country.name.common !== "India" &&
+            country.region !== "Europe" &&
+            country.subregion !== "North America" &&
+            country.name.common !== "Israel"
+          );
+        });
+        const updatedFilteredData = filteredData.map((country)=>{
+          return {
+            ...country,
+            visited: false
+          }
+        })
+        
+        localStorage.setItem("countrylist", JSON.stringify(updatedFilteredData));  //Saves data in local storage
+        
+        setCountry(updatedFilteredData);
+        setFilteredCountries(updatedFilteredData);
+      };
+      fetchFunc();
+    }
   }, []);
 
 
@@ -69,7 +86,7 @@ const Countries = () => {
     }
   };
 
-  const countryInfoHandler = (e, country) => {
+  const countryInfoHandler = (country) => {
     setSelectedCountry(country);
   };
 
@@ -103,7 +120,7 @@ const Countries = () => {
               <CountryCard
                 key={country.cca3}
                 country={country}
-                click={(e) => countryInfoHandler(e, country)}
+                click={countryInfoHandler}
               />
             );
           })}
